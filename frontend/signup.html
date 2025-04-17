@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Money Manager</title>
+    <link rel="stylesheet" href="CSS files/signup.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <!-- Welcome Message -->
+    <div class="welcome">
+        <h1>Welcome to FairShare</h1>
+        <p>Kindly choose your role</p>
+    </div>
+
+    <!-- Role Selection Screen -->
+    <div class="role-selection">
+        <h2>Sign Up As</h2>
+        <button id="admin-signup">Admin</button>
+        <button id="user-signup">User</button>
+    </div>
+
+    <!-- Signup Container (Initially Hidden) -->
+    <div class="signup-container hidden">
+        <div class="signup-box">
+            <h2>Sign Up</h2>
+            <p>Create your account</p>
+
+            <input type="hidden" id="user-type">
+
+            <div class="input-group">
+                <input type="text" id="new-username" placeholder="Enter Username">
+                <span class="icon">👤</span>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="new-password" placeholder="Enter Password">
+                <span class="icon">🔒</span>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="new-room-code" placeholder="Enter Room Code">
+                <span class="icon">🏠</span>
+            </div>
+
+            <button onclick="signUp()">Sign Up</button>
+
+            <p>Already have an account? <a href="signin.html">Login</a></p>
+        </div>
+    </div>
+
+    <script src="JS files/signup.js"></script>
+</body>
+</html>

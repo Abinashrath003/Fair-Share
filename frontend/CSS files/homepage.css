@@ -1,0 +1,295 @@
+/* 🌟 General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* 🔹 Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+}
+
+nav ul li .btn {
+    background: #1f1d19;
+    padding: 8px 15px;
+    border-radius: 10px;
+}
+
+nav ul li .btn:hover {
+    background: #1f1d19;
+}
+
+/* 🔹 Updated Hero Section (Now About Us) */
+.hero {
+    text-align: center;
+    padding: 100px 50px;
+    background: linear-gradient(to bottom, #ffffff, #e3eaf5);
+    color: #333; /* Dark text for readability */
+    max-width: 900px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 10px 0;
+    text-align: justify;
+}
+
+/* Adjusting CTA button */
+.cta-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 30px;
+    font-size: 1.2rem;
+    background: #1f1d19; /* Orange */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cta-btn:hover {
+    background: #e67e22;
+}
+
+
+/* 🔹 Features Section */
+.features {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.slider-container {
+    position: relative;
+    max-width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.cards-wrapper {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    transition: transform 0.5s linear;
+    will-change: transform;
+}
+
+/* 🔹 Feature Cards */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    flex: 0 0 auto;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.card:hover {
+    background: rgb(236, 244, 150);
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 🔹 Continuous Scrolling Effect */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.cards {
+    display: flex;
+    animation: scroll 10s linear infinite;
+}
+
+/* 🔹 Slider Buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev:hover, .next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* 🔹 Testimonials Section */
+.testimonials {
+    padding: 50px 20px;
+    background: #f4f4f4;
+    text-align: center;
+}
+
+.testimonial {
+    margin: 20px auto;
+    width: 60%;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Pricing Plans */
+.pricing {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.plan {
+    display: inline-block;
+    width: 300px;
+    background: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.plan h3 {
+    color: #2c3e50;
+}
+
+.plan p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* 🔹 FAQ Section */
+.faq {
+    padding: 50px 20px;
+    background: #fff;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-item h4 {
+    cursor: pointer;
+    color: #2c3e50;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background: #e9ecef;
+    border-left: 3px solid #2c3e50;
+    font-size: 1rem;
+}
+
+/* 🔹 Newsletter Signup */
+.newsletter {
+    padding: 50px 20px;
+    text-align: center;
+    background: #2c3e50;
+    color: white;
+}
+
+.newsletter input[type="email"] {
+    padding: 10px;
+    width: 250px;
+    border: none;
+    border-radius: 5px;
+}
+
+.newsletter button {
+    padding: 10px 15px;
+    background: #f39c12;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.newsletter button:hover {
+    background: #e67e22;
+}
+
+/* 🔹 About & Contact */
+#about, #contact {
+    margin: 5px;
+    padding: 50px 20px;
+    text-align: center;
+    background: white;
+}
+
+/* 🔹 Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #2c3e50;
+    color: white;
+}
+
+#why{
+    color: #e3eaf5;
+}

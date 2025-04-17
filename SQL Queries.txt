@@ -1,0 +1,40 @@
+SQL Queries
+--------------------------------------
+CREATE DATABASE money_management; //Creating Database
+
+USE money_management; //Using That Database
+
+//Admin Table That Stores Admin Data
+CREATE TABLE admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL, -- Hashed password
+    room_code CHAR(10) UNIQUE NOT NULL
+);
+
+//User Table that Stores Users Data
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    room_code CHAR(10),
+    FOREIGN KEY (room_code) REFERENCES admins(room_code) ON DELETE CASCADE,
+    INDEX (room_code)
+);
+
+//Transaction Table Which stores transaction History
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    room_code CHAR(10),
+    type ENUM('Add Money', 'Withdraw Money') NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    purpose TEXT NOT NULL,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE,
+    FOREIGN KEY (room_code) REFERENCES admins(room_code) ON DELETE CASCADE,
+    INDEX (room_code),
+    INDEX (username)
+);
+
+

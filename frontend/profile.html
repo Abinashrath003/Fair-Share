@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairShare - User Profile</title>
+    <link rel="stylesheet" href="CSS files\profile.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <input type="file" id="profilePicInput" accept="image/*" hidden>
+            <div class="profile-pic-container">
+                <img id="profilePic" src="default-profile.png" alt="Profile Picture" class="profile-pic" onclick="changeProfilePic()">
+                <label for="profilePicInput" class="upload-icon"><i class="fa fa-camera"></i></label>
+            </div>
+            <h2 id="userName">John Doe</h2>
+            <p class="user-role">Flatmate | Budget Manager</p>
+        </div>
+
+        <div class="profile-details">
+            <div class="detail-item">
+                <i class="fa fa-envelope"></i> 
+                <span id="userEmail">john.doe@example.com</span>
+            </div>
+            <div class="detail-item">
+                <i class="fa fa-phone"></i> 
+                <span id="userPhone">+123 456 7890</span>
+            </div>
+            <div class="detail-item">
+                <i class="fa fa-info-circle"></i> 
+                <span id="userBio">Living life, one budget at a time.</span>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <button class="edit-btn" onclick="editProfile()"><i class="fa fa-edit"></i> Edit Profile</button>
+            <button class="logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </div>
+
+    <script src="JS files\profile.js"></script>
+</body>
+</html>

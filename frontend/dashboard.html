@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="CSS files/dashboard.css">
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar" class="sidebar hidden">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+            <li><a href="#"><i class="fas fa-user"></i> Users</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+    <button id="floatingToggle" class="floating-btn" onclick="toggleSidebar()">☰</button>
+
+    <!-- Main Dashboard Content -->
+    <div class="main-content" id="mainContent">
+        <header>
+            <div class="header-left">
+                <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+                <h1>Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <button class="profile-btn" onclick="window.location.href='profile.html'">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                
+                <button class="logout-btn" onclick="window.location.href='homepage.html'">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+                
+            </div>
+        </header>
+
+        <!-- Stats and Management Container -->
+        <div class="stats-management-container">
+            <div class="left-container">
+                <div class="stats">
+                    <div class="card">
+                        <h3>Total Balance</h3>
+                        <p id="totalBalance">$0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Transactions This Month</h3>
+                        <p id="totalTransactions">0</p>
+                        <select id="monthFilter" onchange="filterTransactions()">
+                            <option value="all">All Months</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Money Management Section Moved Below Transactions -->
+                <div class="money-management">
+                    <h2>Manage Transactions</h2>
+                    <div class="actions">
+                        <input type="text" id="amount" placeholder="Enter Amount">
+                        <input type="text" id="givenBy" placeholder="Given By" style="display: none;">
+                        <input type="text" id="givenTo" placeholder="Given To" style="display: none;">
+                        <input type="text" id="purpose" placeholder="Enter Purpose" style="display: none;">
+
+                        <button class="add-money" onclick="handleTransactionType('Add Money')">Add Money</button>
+                        <button class="withdraw-money" onclick="handleTransactionType('Withdraw Money')">Withdraw Money</button>
+                        
+                        <button class="confirm-btn" onclick="confirmTransaction()" style="display: none;">Confirm</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Chart -->
+            <div class="right-container">
+                <div class="chart-container">
+                    <h3>Total Balance Over Time</h3>
+                    <select id="balanceMonthFilter" onchange="filterBalanceChart()">
+                        <option value="all">All Months</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <canvas id="balanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transactions Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>User Name</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Purpose</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="transactionTable">
+                <!-- Transactions will be dynamically inserted -->
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-container" id="paginationContainer" style="display: none;">
+            <button onclick="prevPage()" id="prevBtn" disabled>&lt; Previous</button>
+            <span id="pageInfo">Page 1</span>
+            <button onclick="nextPage()" id="nextBtn">Next &gt;</button>
+        </div>
+
+    <script src="JS files/dashboard.js"></script>
+</body>
+</html>

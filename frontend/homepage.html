@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairShare</title>
+    <link rel="stylesheet" href="CSS files\homepage.css">
+    <script defer src="JS files\homepage.js"></script>
+</head>
+<body>
+
+    <!-- 🔹 Navigation Bar -->
+    <header>
+        <h1>FairShare</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="signup.html" class="btn">Sign Up</a></li>
+                <li><a href="signin.html" class="btn">Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 🔹 Hero Section (Now "About Us") -->
+    <section class="hero">
+        <h2>Welcome to FairShare</h2>
+        <p>
+            Struggling to track shared expenses with your flatmates? Our system is built specifically 
+            to make expense tracking seamless. Manage shared expenses, monitor contributions, and 
+            ensure financial clarity in a few easy steps.
+        </p>
+        <p>
+            With real-time tracking, smart budgeting tools, and multi-user support, 
+            we make financial management stress-free. Whether it's rent, utilities, or grocery splits, 
+            we've got you covered.
+        </p>
+        <a href="signup.html" class="cta-btn">Start Managing Now</a>
+    </section>
+
+
+    <!-- 🔹 Features Section -->
+    <section class="features">
+        <h2 id="why">Why Choose Us?</h2>
+        <div class="slider-container">
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="cards-wrapper">
+                <div class="cards">
+                    <div class="card">
+                        <img src="images\secure_transaction.avif" alt="Secure Transactions">
+                        <h3>Secure Transactions</h3>
+                        <p>We ensure top-notch security for your financial data.</p>
+                    </div>
+                    <div class="card">
+                        <img src="images\Financial_Insights.avif" alt="Financial Insights">
+                        <h3>Financial Insights</h3>
+                        <p>Track your income and expenses with ease.</p>
+                    </div>
+                    <div class="card">
+                        <img src="images\Easy_to_use.avif" alt="Easy to Use">
+                        <h3>Easy to Use</h3>
+                        <p>Simple and user-friendly interface for everyone.</p>
+                    </div>
+                    <div class="card">
+                        <img src="images\expense_tracking.jpg" alt="Expense Tracking">
+                        <h3>Expense Tracking</h3>
+                        <p>Monitor where your money is going in real-time.</p>
+                    </div>
+                    <div class="card">
+                        <img src="images\budgeting_tools.jpg" alt="Budgeting Tools">
+                        <h3>Budgeting Tools</h3>
+                        <p>Set budgets and plan your expenses efficiently.</p>
+                    </div>
+                    <div class="card">
+                        <img src="images\multi_user.png" alt="Multi-User Support">
+                        <h3>Multi-User Support</h3>
+                        <p>Manage shared expenses with your flatmates effortlessly.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- 🔹 Testimonials Section -->
+    <section class="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial">
+            <p>"This app has completely changed how we manage our shared expenses. Highly recommended!"</p>
+            <h4>- John Doe</h4>
+        </div>
+        <div class="testimonial">
+            <p>"I used to struggle with tracking my spending. Now, it's all so easy and efficient!"</p>
+            <h4>- Jane Smith</h4>
+        </div>
+    </section>
+
+    <!-- 🔹 Pricing Plans -->
+    <section id="pricing" class="pricing">
+        <h2 id="why">Choose Your Plan</h2>
+        <div class="plan">
+            <h3>Free Plan</h3>
+            <p>Basic expense tracking for individuals and group.</p>
+            <p><strong>$0/month</strong></p>
+        </div>
+        <div class="plan">
+            <h3>Premium Plan</h3>
+            <p>Advanced analytics and multi-user support.</p>
+            <p><strong>$9.99/month</strong></p>
+        </div>
+        <div class="plan">
+            <h3>Business Plan</h3>
+            <p>Best for businesses and team expense tracking.</p>
+            <p><strong>$19.99/month</strong></p>
+        </div>
+    </section>
+
+    <!-- 🔹 FAQ Section -->
+    <section id="faq" class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h4 onclick="toggleFAQ(this)">How secure is my financial data? ⬇</h4>
+            <p class="faq-answer">We use industry-standard encryption to keep your data safe.</p>
+        </div>
+        <div class="faq-item">
+            <h4 onclick="toggleFAQ(this)">Can I use this for business expenses? ⬇</h4>
+            <p class="faq-answer">Yes! We offer business plans tailored for team expense tracking.</p>
+        </div>
+    </section>
+
+    <!-- 🔹 Newsletter Signup -->
+    <section class="newsletter">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter to get the latest updates.</p>
+        <input type="email" placeholder="Enter your email">
+        <button>Subscribe</button>
+    </section>
+
+    <!-- 🔹 Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: support@fairshare.com | Phone: +123-456-7890</p>
+    </section>
+
+    <!-- 🔹 Footer -->
+    <footer>
+        <p>&copy; 2025 Fair Share System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Infinite Scrolling for Features Cards
+        let currentIndex = 0;
+        function moveSlide(step) {
+            const cards = document.querySelector('.cards');
+            const cardWidth = document.querySelector('.card').offsetWidth + 20; // Include margin
+            const totalCards = document.querySelectorAll('.card').length;
+            
+            currentIndex = (currentIndex + step) % totalCards;
+            if (currentIndex < 0) currentIndex = totalCards - 1;
+            
+            cards.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+</html>

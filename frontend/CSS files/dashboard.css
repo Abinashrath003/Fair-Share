@@ -1,0 +1,314 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: all 0.3s ease;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 20px 20px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    padding-left: 15px;
+    transition: 0.3s;
+    box-shadow: 2px 2px 5px white;
+    border-radius: 5px;
+}
+
+/* Sidebar Toggle Button */
+.toggle-btn {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Sidebar Hidden by Default */
+.sidebar.hidden {
+    left: -250px; /* Move sidebar off-screen */
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 260px;
+    padding: 20px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Adjust Main Content When Sidebar is Hidden */
+.main-content.expanded {
+    margin-left: 20px;
+    width: calc(100% - 20px);
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left h1 {
+    margin-left: 10px;
+    font-size: 22px;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+.header-right button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.profile-btn {
+    background: #3498db;
+    color: white;
+}
+
+.logout-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.profile-btn:hover {
+    background: #2980b9;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+/* Stats and Management Container */
+.stats-management-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+}
+
+.card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    
+}
+
+.money-management {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.actions input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.actions button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.right-container {
+    flex: 1;
+}
+
+.chart-container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.chart-container select {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+@media (max-width: 768px) {
+    .stats-management-container {
+        flex-direction: column;
+    }
+}
+
+/* Table */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+}
+
+tr:hover {
+    background: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        left: -100%;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+.add-money{
+    background-color: rgb(102, 223, 102);
+}
+.add-money:hover{
+    background-color: rgb(102, 223, 102, 0.9);
+    box-shadow: 2px 2px 5px green;
+
+}
+.withdraw-money{
+    background-color: #e75241;
+}
+.withdraw-money:hover{
+    background-color: #e75241;
+    box-shadow: 2px 2px 5px rgb(184, 30, 30);
+}
+.confirm-btn{
+    background-color: #3498db;
+}
+.confirm-btn:hover{
+    background-color: #3498db;
+    box-shadow: 2px 2px 5px rgb(54, 115, 219);
+}
+
+.toggle-btn {
+    position: absolute;
+    left: 10px;  /* Moves it to the extreme left */
+    top: 20px;   /* Adjust vertical positioning */
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    z-index: 1000; /* Ensures it's always on top */
+}
+
+#monthFilter{
+    background-color: #d5e7f3;
+    border-radius: 5px;
+}
+
+#balanceMonthFilter{
+    background-color: #d5e7f3;
+    border-radius: 5px;
+}
+
+body.dark-theme {
+    background-color: #1f1f1f;
+    color: #f0f0f0;
+}

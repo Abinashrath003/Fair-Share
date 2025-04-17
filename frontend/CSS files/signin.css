@@ -1,0 +1,223 @@
+/* 🌟 General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    color: white;
+}
+
+/* 🔹 Welcome Message */
+.welcome {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* 🔹 Role Selection */
+.role-selection {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.role-selection:hover {
+    transform: scale(1.02);
+}
+
+.role-selection h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.role-selection button {
+    background: #ff9800;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    width: 150px;
+}
+
+.role-selection button:hover {
+    background: #f57c00;
+    transform: scale(1.05);
+}
+
+/* Hide Login Form Initially */
+.hidden {
+    display: none;
+}
+
+/* 🔹 Login Box */
+.login-box {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 360px;
+    max-width: 90%;
+    backdrop-filter: blur(12px);
+    transition: 0.3s;
+}
+
+.login-box:hover {
+    transform: scale(1.02);
+}
+
+.login-box h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.login-box p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+/* 🔹 Input Fields */
+.input-group {
+    position: relative;
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.input-group input {
+    width: calc(100% - 10px);
+    padding: 12px;
+    padding-left: 45px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    outline: none;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.22);
+    transform: scale(1.02);
+    border: 1px solid #ff9800;
+}
+
+/* 🔹 Icons */
+.input-group .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+}
+
+/* 🔹 Buttons */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #43A047;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Links */
+p a {
+    color: #ff9800;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+p a:hover {
+    text-decoration: underline;
+    color: #f57c00;
+}
+
+/* 🔹 Profile Picture Upload */
+.profile-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.profile-container input {
+    display: none;
+}
+
+.profile-container label img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #ff9800;
+    cursor: pointer;
+    transition: transform 0.3s ease, border 0.3s ease;
+}
+
+.profile-container label img:hover {
+    transform: scale(1.1);
+    border-color: #f57c00;
+}
+
+/* 🔹 Theme Toggle */
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#theme-button {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+#theme-button:hover {
+    color: #ff9800;
+}
