@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="CSS files/dashboard.css">
-    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -81,34 +80,21 @@
                         <input type="text" id="givenBy" placeholder="Given By" style="display: none;">
                         <input type="text" id="givenTo" placeholder="Given To" style="display: none;">
                         <input type="text" id="purpose" placeholder="Enter Purpose" style="display: none;">
-
-                        <button class="add-money" onclick="handleTransactionType('Add Money')">Add Money</button>
-                        <button class="withdraw-money" onclick="handleTransactionType('Withdraw Money')">Withdraw Money</button>
-                        
+                
+                        <button class="add-money-btn" onclick="handleTransactionType('Add Money')">Add Money</button>
+                        <button class="withdraw-money-btn" onclick="handleTransactionType('Withdraw Money')">Withdraw Money</button>
+                
                         <button class="confirm-btn" onclick="confirmTransaction()" style="display: none;">Confirm</button>
                     </div>
                 </div>
+                
             </div>
 
             <!-- Right Side: Chart -->
             <div class="right-container">
                 <div class="chart-container">
                     <h3>Total Balance Over Time</h3>
-                    <select id="balanceMonthFilter" onchange="filterBalanceChart()">
-                        <option value="all">All Months</option>
-                        <option value="1">January</option>
-                        <option value="2">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>
+                    
                     <canvas id="balanceChart"></canvas>
                 </div>
             </div>
@@ -123,7 +109,7 @@
                     <th>Amount</th>
                     <th>Type</th>
                     <th>Purpose</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </tr>
             </thead>
             <tbody id="transactionTable">

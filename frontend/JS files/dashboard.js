@@ -1,7 +1,7 @@
 let currentType = "";
 let transactions = [];
 let currentPage = 1;
-const transactionsPerPage = 5;
+const transactionsPerPage = 10;
 let totalBalance = 0;
 
 // Chart Setup
@@ -11,11 +11,20 @@ let balanceHistory = {
         label: "Total Balance Over Time",
         data: [],
         backgroundColor: "rgba(75, 192, 192, 0.5)",
-        borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 2,
-        fill: false
+        fill: false,
+        tension: 0.4,
+        pointRadius: 3,
+        
+        segment: {
+            borderColor: ctx => {
+                const { p0, p1 } = ctx;
+                return p1.y < p0.y ? 'green' : 'red'; // increasing = green, decreasing = red
+            }
+        }
     }]
 };
+
 
 let ctx = document.getElementById("balanceChart").getContext("2d");
 let balanceChart = new Chart(ctx, {
@@ -23,17 +32,68 @@ let balanceChart = new Chart(ctx, {
     data: balanceHistory,
     options: {
         responsive: true,
-        scales: { y: { beginAtZero: false } }
+        scales: {
+            y: { beginAtZero: false },
+            x: {
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 45,
+                    minRotation: 30
+                }
+            }
+        },
+        plugins: {
+            legend: { display: true },
+            tooltip: {
+                enabled: true,
+                mode: 'nearest',
+                intersect: false,
+                callbacks: {
+                    label: function (context) {
+                        return `₹${context.parsed.y.toFixed(2)}`;
+                    }
+                }
+            }
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+        }
     }
 });
 
+
+
+
 function handleTransactionType(type) {
+    const amountInput = document.getElementById("amount");
+    const amount = parseFloat(amountInput.value.trim());
+
+    if (isNaN(amount) || amount <= 0) {
+        return Swal.fire("Invalid Amount", "Please enter a valid amount first.", "warning");
+    }
+
     currentType = type;
+
+    // Show only the relevant input field based on transaction type
     document.getElementById("givenBy").style.display = type === "Add Money" ? "block" : "none";
     document.getElementById("givenTo").style.display = type === "Withdraw Money" ? "block" : "none";
     document.getElementById("purpose").style.display = "block";
+
+    // Hide action buttons
+    document.querySelector(".add-money-btn").style.display = "none";
+    document.querySelector(".withdraw-money-btn").style.display = "none";
+
+    // Show confirm button
     document.querySelector(".confirm-btn").style.display = "inline-block";
 }
+
+
 
 function confirmTransaction() {
     const amountInput = document.getElementById("amount");
@@ -65,16 +125,9 @@ function confirmTransaction() {
     .then(res => res.json())
     .then(data => {
         if (data.message) {
-            Swal.fire("Success!", data.message, "success");
-            amountInput.value = "";
-            document.getElementById("givenBy").value = "";
-            document.getElementById("givenTo").value = "";
-            document.getElementById("purpose").value = "";
-            document.querySelector(".confirm-btn").style.display = "none";
-            document.getElementById("givenBy").style.display = "none";
-            document.getElementById("givenTo").style.display = "none";
-            document.getElementById("purpose").style.display = "none";
-            fetchTransactions(room_code); // Refresh list and balance
+            Swal.fire("Success!", data.message, "success").then(() => {
+                location.reload();
+            });
         } else {
             Swal.fire("Error", data.error || "Transaction failed", "error");
         }
@@ -97,23 +150,29 @@ async function fetchTransactions(roomCode) {
 }
 
 function calculateBalance() {
-    totalBalance = transactions.reduce((acc, txn) => {
-        return txn.type === "Add Money"
-            ? acc + parseFloat(txn.amount)
-            : acc - parseFloat(txn.amount);
-    }, 0);
+    // Sort transactions by date to maintain chronological order
+    transactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    totalBalance = 0;
+    let runningBalance = 0;
+    let labels = [];
+    let dataPoints = [];
+
+    transactions.forEach((txn, index) => {
+        const amount = parseFloat(txn.amount);
+        runningBalance += txn.type === "Add Money" ? amount : -amount;
+
+        // Create label with index and readable timestamp
+        labels.push(`#${index + 1}`);
+        dataPoints.push(runningBalance);
+    });
+
+    totalBalance = runningBalance;
 
     document.getElementById("totalBalance").textContent = `₹${totalBalance.toFixed(2)}`;
 
-    balanceHistory.labels = transactions.map(txn => new Date(txn.date).toLocaleDateString());
-    balanceHistory.datasets[0].data = [];
-    let runningBalance = 0;
-    transactions.forEach(txn => {
-        runningBalance += txn.type === "Add Money"
-            ? parseFloat(txn.amount)
-            : -parseFloat(txn.amount);
-        balanceHistory.datasets[0].data.push(runningBalance);
-    });
+    balanceHistory.labels = labels;
+    balanceHistory.datasets[0].data = dataPoints;
 
     balanceChart.update();
 }
@@ -122,12 +181,15 @@ function updateTable() {
     let transactionTable = document.getElementById("transactionTable");
     transactionTable.innerHTML = "";
 
-    let totalPages = Math.ceil(transactions.length / transactionsPerPage);
+    // Show the most recent transactions first in the table only
+    let sortedTransactions = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    let totalPages = Math.ceil(sortedTransactions.length / transactionsPerPage);
     if (currentPage > totalPages) currentPage = totalPages || 1;
 
     let startIndex = (currentPage - 1) * transactionsPerPage;
     let endIndex = startIndex + transactionsPerPage;
-    let visibleTransactions = transactions.slice(startIndex, endIndex);
+    let visibleTransactions = sortedTransactions.slice(startIndex, endIndex);
 
     visibleTransactions.forEach(transaction => {
         let newRow = transactionTable.insertRow();
@@ -137,12 +199,12 @@ function updateTable() {
             <td>₹${transaction.amount}</td>
             <td>${transaction.type}</td>
             <td>${transaction.purpose}</td>
-            <td><button onclick="deleteTransaction('${transaction.id}')">🗑 Delete</button></td>
         `;
     });
 
     updatePagination();
 }
+
 
 function updatePagination() {
     let totalPages = Math.ceil(transactions.length / transactionsPerPage);

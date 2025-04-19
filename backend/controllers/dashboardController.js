@@ -1,7 +1,6 @@
-
 const db = require("../config/db");
 
-// Create a transaction
+// Create a transaction with room code and user validation
 exports.createTransaction = (req, res) => {
     const { username, room_code, type, amount, purpose } = req.body;
 
@@ -9,18 +8,35 @@ exports.createTransaction = (req, res) => {
         return res.status(400).json({ error: "All fields are required" });
     }
 
-    const insertQuery = `
-        INSERT INTO transactions (username, room_code, type, amount, purpose)
-        VALUES (?, ?, ?, ?, ?)
+    // Check if username exists and matches the same room_code
+    const checkUserQuery = `
+        SELECT * FROM users WHERE username = ? AND room_code = ?
     `;
 
-    db.query(insertQuery, [username, room_code, type, amount, purpose], (err, result) => {
+    db.query(checkUserQuery, [username, room_code], (err, userResults) => {
         if (err) {
-            console.error("Error inserting transaction:", err);
-            return res.status(500).json({ error: "Failed to record transaction" });
+            console.error("Error checking user:", err);
+            return res.status(500).json({ error: "Server error while validating user" });
         }
 
-        return res.status(200).json({ message: "Transaction recorded successfully" });
+        if (userResults.length === 0) {
+            return res.status(403).json({ error: "User not found or room code mismatch" });
+        }
+
+        // Proceed to insert transaction
+        const insertQuery = `
+            INSERT INTO transactions (username, room_code, type, amount, purpose)
+            VALUES (?, ?, ?, ?, ?)
+        `;
+
+        db.query(insertQuery, [username, room_code, type, amount, purpose], (err, result) => {
+            if (err) {
+                console.error("Error inserting transaction:", err);
+                return res.status(500).json({ error: "Failed to record transaction" });
+            }
+
+            return res.status(200).json({ message: "Transaction recorded successfully" });
+        });
     });
 };
 
@@ -48,4 +64,3 @@ exports.getTransactions = (req, res) => {
         res.json(results);
     });
 };
-

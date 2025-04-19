@@ -46,11 +46,17 @@ async function signUp() {
                 title: "Success!",
                 text: "Account created successfully!",
                 icon: "success",
-                timer: 2000, // Wait for 2 seconds
+                timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                window.location.href = "homepage.html"; // Adjust path if needed
+                window.location.href = "homepage.html";
             });
+        } else if (response.status === 409) {
+            if (data.error === "username_exists") {
+                Swal.fire("Username Exists", "The username is already taken. Try a different one.", "warning");
+            } else if (data.error === "room_code_exists") {
+                Swal.fire("Room Code Exists", "The room code is already taken. Try a different one.", "warning");
+            }
         } else {
             Swal.fire("Signup Failed!", data.error || "Please try again", "error");
         }
